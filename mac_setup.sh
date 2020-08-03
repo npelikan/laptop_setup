@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Laptop setup!
 # This is for macs
 
@@ -19,6 +21,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # conda
 brew cask install miniconda
+conda init zsh
 
 # pycharm
 # if this throws a hdiutil error, you likely have a process blocking hdiutil
@@ -27,6 +30,20 @@ brew cask install pycharm-ce
 
 # jupyter lab (creates conda env as well)
 conda create --name jupyter -y jupyterlab nb_conda_kernels
+
+# jupyter launcher
+# activates the correct conda environment, and opens jupyterlab in a screen
+touch .jupyter_launcher.sh
+cat <<EOT >> .jupyter_launcher.sh
+#!/bin/bash
+
+function run_jupyter() {
+  conda activate jupyter
+  screen jupyter lab
+}
+EOT
+chmod +x .jupyter_launcher.sh
+echo "source .jupyter_launcher.sh" >> ~/.zshrc
 
 # r
 brew install r
