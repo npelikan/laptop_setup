@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Laptop setup!
-# This is for macs
+# This is for macs, tested and used on Catalina
 
 # xcode developer tools
 xcode-select --install
