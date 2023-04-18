@@ -19,6 +19,10 @@ apt install zsh -y
 chsh -s $(which zsh)
 # make it pretty
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# even prettier
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+echo "ZSH_THEME=\"powerlevel10k/powerlevel10k\"" | tee -a ~/.zshrc
+cp .p10k.zsh $HOME/.p10k.zsh
 
 # condas
 wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
@@ -48,11 +52,15 @@ echo "source ~/.jupyter_launcher.sh" >> ~/.zshrc
 snap install pycharm-community --classic
 
 # r
-apt install dirmngr gnupg apt-transport-https ca-certificates software-properties-common
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/'
-apt install r-base -y
+apt install --no-install-recommends software-properties-common dirmngr
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+apt install -y r-base r-base-dev
+
+# tidyverse and dependencies
+apt install -y libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+R -e "install.packages('tidyverse')"
 
 # rstudio
-wget "https://download1.rstudio.org/desktop/debian9/x86_64/rstudio-1.3.1056-amd64.deb"
-gdebi rstudio-1.3.1056-amd64.deb
+wget -O rstudio-latest.deb "https://rstudio.org/download/latest/stable/desktop/bionic/rstudio-latest-amd64.deb"
+gdebi rstudio-latest.deb
