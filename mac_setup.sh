@@ -35,7 +35,7 @@ conda init zsh
 
 # vscode
 brew install --cask visual-studio-code
-code --install-exension rust-lang.rust-analyzer
+code --install-extension rust-lang.rust-analyzer
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-python.python
 code --install-extension ms-python.vscode-pylance
