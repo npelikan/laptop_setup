@@ -10,12 +10,13 @@ xcode-select --install
 # ohmyzsh (gotta keep it all looking pretty!)
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 # even prettier
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 sed -i 's/ZSH_THEME=.*/ZSH_THEME=\"powerlevel10k/powerlevel10k\"/g' ~.zshrc
 cp .p10k.zsh $HOME/.p10k.zsh
 
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shelling)"') >> /Users/nickp/.zprofile
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shelling)"') >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # iterm2
