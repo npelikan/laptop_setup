@@ -35,6 +35,12 @@ conda init zsh
 
 # vscode
 brew install --cask visual-studio-code
+code --install-exension rust-lang.rust-analyzer
+code --install-extension ms-toolsai.jupyter
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension REditorSupport.r
+
 
 # jupyter lab (creates conda env as well)
 conda create --name jupyter -y jupyterlab nb_conda_kernels
